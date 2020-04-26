@@ -355,16 +355,14 @@ export class IbizMobileCayanrlendar {
   public render_showMonthPicker() {
     if (this._showMonthPicker) {
       return (
-        <div>
           <ion-button type="button"
             fill="clear"
             class="switch-btn"
             onClick={() => this.switchView()}>
             {this._monthFormat(this.monthOpt.original.time)}
             <ion-icon class="arrow-dropdown"
-              name={this._view === 'days' ? 'md-arrow-dropdown' : 'md-arrow-dropup'}></ion-icon>
+              name={this._view === 'days' ? 'caret-down-outline' : 'caret-up-outline'}></ion-icon>
           </ion-button>
-        </div>
       );
     }
   }
@@ -380,10 +378,10 @@ export class IbizMobileCayanrlendar {
       return (
         <div>
           <ion-button type="button" fill="clear" class="back" disabled={!this.canBack()} onClick={() => this.prev()}>
-            <ion-icon slot="icon-only" size="small" name="ios-arrow-back"></ion-icon>
+            <ion-icon slot="icon-only" size="small" name="chevron-back-outline"></ion-icon>
           </ion-button>
           <ion-button type="button" fill="clear" class="forward" disabled={!this.canNext()} onClick={() => this.next()}>
-            <ion-icon slot="icon-only" size="small" name="ios-arrow-forward"></ion-icon>
+            <ion-icon slot="icon-only" size="small" name="chevron-forward-outline"></ion-icon>
           </ion-button>
         </div>
       );
@@ -437,13 +435,11 @@ export class IbizMobileCayanrlendar {
   render() {
     return (
       <Host>
-        <slot>
-          <div class="title">
-            {this.render_showMonthPicker()}
-            {this.render_showToggleButtons()}
-          </div>
-          {this.render_view()}
-        </slot>
+        <div class="title">
+          {this.render_showMonthPicker()}
+          {this.render_showToggleButtons()}
+        </div>
+        {this.render_view()}
       </Host>
     );
   }
