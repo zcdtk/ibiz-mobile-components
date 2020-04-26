@@ -14,6 +14,7 @@ export namespace Components {
         "month": CalendarMonth;
         "pickMode": string;
         "readonly": boolean;
+        "value": CalendarDay[];
     }
     interface CalendarWeek {
         "color": string;
@@ -85,6 +86,7 @@ declare namespace LocalJSX {
         "onSelectStart"?: (event: CustomEvent<CalendarDay>) => void;
         "pickMode"?: string;
         "readonly"?: boolean;
+        "value"?: CalendarDay[];
     }
     interface CalendarWeek {
         "color"?: string;

@@ -15,6 +15,7 @@
 | `month`         | --                |             | `CalendarMonth` | `undefined`      |
 | `pickMode`      | `pick-mode`       |             | `string`        | `undefined`      |
 | `readonly`      | `readonly`        |             | `boolean`       | `false`          |
+| `value`         | --                |             | `CalendarDay[]` | `undefined`      |
 
 
 ## Events

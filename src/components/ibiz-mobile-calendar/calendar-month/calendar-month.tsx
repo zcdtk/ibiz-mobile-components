@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
+import { Component, Host, h, Prop, Event, EventEmitter, Watch } from '@stencil/core';
 
 import { CalendarDay, CalendarMonth, CalendarOriginal } from '../calendar.model';
 import { defaults, pickModes } from '../config';
@@ -48,15 +48,25 @@ export class CanlendarMonth {
     this._isInit = true;
   }
 
-  get value() {
-    return this._date;
-  }
+  @Prop() value: CalendarDay[];
 
-  writeValue(obj: any): void {
-    if (Array.isArray(obj)) {
-      this._date = obj;
+  @Watch('value')
+  valueWatchValue(newValue: CalendarDay, oldValue: CalendarDay) {
+    console.log(oldValue);
+    if (Array.isArray(newValue)) {
+      this._date = newValue;
     }
   }
+
+  // get value() {
+  //   return this._date;
+  // }
+
+  // writeValue(obj: any): void {
+  //   if (Array.isArray(obj)) {
+  //     this._date = obj;
+  //   }
+  // }
 
   registerOnChange(fn: any): void {
     this._onChanged = fn;
@@ -175,14 +185,62 @@ export class CanlendarMonth {
     }
   }
 
+  public render_day(day: CalendarDay) {
+    const _day = (day: CalendarDay) => {
+      if (day) {
+        return (
+          <button type='button'
+            class={{
+              ['days-btn ' + day.cssClass]: true,
+              today: day.isToday,
+              marked: day.marked,
+              'last-month-day': day.isLastMonth,
+              'next-month-day': day.isNextMonth,
+              'on-selected': this.isSelected(day.time),
+            }}
+            onClick={() => this.onSelected(day)}
+            disabled={day.disable}>
+            <p>{day.title}</p>
+            {day.subTitle ? <small >{day.subTitle}</small> : null}
+          </button>
+        );
+      }
+      return '';
+    }
+    if (this._isRange) {
+      return (
+        <div class="days">
+          {_day(day)}
+        </div>
+      );
+    }
+    return (
+      <div
+        class={{
+          ['days']: true,
+          'startSelection': this.isStartSelection(day),
+          'endSelection': this.isEndSelection(day),
+          'is-first-wrap': day.isFirst,
+          'is-last-wrap': day.isLast,
+          'between': this.isBetween(day),
+        }}>
+        {_day(day)}
+      </div>
+    );
+  }
+
   public render() {
     return (
       <Host>
-        <slot>
-          <div class={this.color}>
-
+        <div class={this.color}>
+          <div class="days-box">
+            {
+              this.month.days.map((day: CalendarDay) => {
+                return this.render_day(day);
+              })
+            }
           </div>
-        </slot>
+        </div>
       </Host >
     );
   }
