@@ -5,8 +5,13 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { CalendarComponentMonthChange, CalendarComponentOptions, CalendarComponentPayloadTypes, CalendarComponentTypeProperty, CalendarDay, } from "./components/ibiz-mobile-calendar/calendar.model";
 export namespace Components {
     interface IbizMobileCalendar {
+        "format": string;
+        "options": CalendarComponentOptions;
+        "readonly": boolean;
+        "type": CalendarComponentTypeProperty;
     }
     interface MyComponent {
         /**
@@ -43,6 +48,15 @@ declare global {
 }
 declare namespace LocalJSX {
     interface IbizMobileCalendar {
+        "format"?: string;
+        "onChange"?: (event: CustomEvent<CalendarComponentPayloadTypes>) => void;
+        "onMonthChange"?: (event: CustomEvent<CalendarComponentMonthChange>) => void;
+        "onSelect"?: (event: CustomEvent<CalendarDay>) => void;
+        "onSelectEnd"?: (event: CustomEvent<CalendarDay>) => void;
+        "onSelectStart"?: (event: CustomEvent<CalendarDay>) => void;
+        "options"?: CalendarComponentOptions;
+        "readonly"?: boolean;
+        "type"?: CalendarComponentTypeProperty;
     }
     interface MyComponent {
         /**
