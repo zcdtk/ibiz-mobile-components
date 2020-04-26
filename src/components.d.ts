@@ -5,8 +5,21 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { CalendarComponentMonthChange, CalendarComponentOptions, CalendarComponentPayloadTypes, CalendarComponentTypeProperty, CalendarDay, } from "./components/ibiz-mobile-calendar/calendar.model";
+import { CalendarComponentMonthChange, CalendarComponentOptions, CalendarComponentPayloadTypes, CalendarComponentTypeProperty, CalendarDay, CalendarMonth, } from "./components/ibiz-mobile-calendar/calendar.model";
 export namespace Components {
+    interface CalendarMonth {
+        "_id": any;
+        "color": string;
+        "isSaveHistory": boolean;
+        "month": CalendarMonth;
+        "pickMode": string;
+        "readonly": boolean;
+    }
+    interface CalendarWeek {
+        "color": string;
+        "weekArray": string[];
+        "weekStart": number;
+    }
     interface IbizMobileCalendar {
         "format": string;
         "options": CalendarComponentOptions;
@@ -29,6 +42,18 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLCalendarMonthElement extends Components.CalendarMonth, HTMLStencilElement {
+    }
+    var HTMLCalendarMonthElement: {
+        prototype: HTMLCalendarMonthElement;
+        new (): HTMLCalendarMonthElement;
+    };
+    interface HTMLCalendarWeekElement extends Components.CalendarWeek, HTMLStencilElement {
+    }
+    var HTMLCalendarWeekElement: {
+        prototype: HTMLCalendarWeekElement;
+        new (): HTMLCalendarWeekElement;
+    };
     interface HTMLIbizMobileCalendarElement extends Components.IbizMobileCalendar, HTMLStencilElement {
     }
     var HTMLIbizMobileCalendarElement: {
@@ -42,11 +67,30 @@ declare global {
         new (): HTMLMyComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "calendar-month": HTMLCalendarMonthElement;
+        "calendar-week": HTMLCalendarWeekElement;
         "ibiz-mobile-calendar": HTMLIbizMobileCalendarElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface CalendarMonth {
+        "_id"?: any;
+        "color"?: string;
+        "isSaveHistory"?: boolean;
+        "month"?: CalendarMonth;
+        "onChange"?: (event: CustomEvent<CalendarDay[]>) => void;
+        "onSelect"?: (event: CustomEvent<CalendarDay>) => void;
+        "onSelectEnd"?: (event: CustomEvent<CalendarDay>) => void;
+        "onSelectStart"?: (event: CustomEvent<CalendarDay>) => void;
+        "pickMode"?: string;
+        "readonly"?: boolean;
+    }
+    interface CalendarWeek {
+        "color"?: string;
+        "weekArray"?: string[];
+        "weekStart"?: number;
+    }
     interface IbizMobileCalendar {
         "format"?: string;
         "onChange"?: (event: CustomEvent<CalendarComponentPayloadTypes>) => void;
@@ -73,6 +117,8 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface IntrinsicElements {
+        "calendar-month": CalendarMonth;
+        "calendar-week": CalendarWeek;
         "ibiz-mobile-calendar": IbizMobileCalendar;
         "my-component": MyComponent;
     }
@@ -81,6 +127,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "calendar-month": LocalJSX.CalendarMonth & JSXBase.HTMLAttributes<HTMLCalendarMonthElement>;
+            "calendar-week": LocalJSX.CalendarWeek & JSXBase.HTMLAttributes<HTMLCalendarWeekElement>;
             "ibiz-mobile-calendar": LocalJSX.IbizMobileCalendar & JSXBase.HTMLAttributes<HTMLIbizMobileCalendarElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }

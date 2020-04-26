@@ -19,7 +19,7 @@ import { defaults, pickModes } from './config';
 @Component({
   tag: 'ibiz-mobile-calendar',
   styleUrl: 'ibiz-mobile-calendar.scss',
-  scoped: true
+  scoped: true,
 })
 export class IbizMobileCayanrlendar {
 
