@@ -1,5 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { IbizMobileCalendar } from './ibiz-mobile-calendar';
+import { IbizMobileCalendar } from '../ibiz-mobile-calendar';
 
 describe('ibiz-mobile-calendar', () => {
   it('renders', async () => {
