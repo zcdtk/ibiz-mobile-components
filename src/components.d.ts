@@ -5,13 +5,17 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { MenuChangeEventDetail, Side, } from "@ionic/core";
+import { FrameworkDelegate, MenuChangeEventDetail, OverlayEventDetail, Side, } from "@ionic/core";
 export namespace Components {
     interface CalendarMonth {
     }
     interface CalendarWeek {
     }
     interface IbizDrawer {
+        /**
+          * If `true`, the modal will animate.
+         */
+        "animated": boolean;
         /**
           * Closes the menu. If the menu is already closed or it can't be closed, it returns `false`.
          */
@@ -20,6 +24,7 @@ export namespace Components {
           * The content's id the menu should use.
          */
         "contentId"?: string;
+        "delegate"?: FrameworkDelegate;
         /**
           * If `true`, the menu is disabled.
          */
@@ -33,6 +38,10 @@ export namespace Components {
          */
         "isOpen": () => Promise<boolean>;
         /**
+          * If `true`, the keyboard will be automatically dismissed when the overlay is presented.
+         */
+        "keyboardClose": boolean;
+        /**
           * The edge threshold for dragging the menu open. If a drag/swipe happens over this value, the menu is not triggered.
          */
         "maxEdgeStart": number;
@@ -44,6 +53,7 @@ export namespace Components {
           * Opens the menu. If the menu is already open or it can't be opened, it returns `false`.
          */
         "open": (animated?: boolean) => Promise<boolean>;
+        "overlayIndex": number;
         /**
           * Opens or closes the button. If the operation can't be completed successfully, it returns `false`.
          */
@@ -128,6 +138,10 @@ declare namespace LocalJSX {
     }
     interface IbizDrawer {
         /**
+          * If `true`, the modal will animate.
+         */
+        "animated"?: boolean;
+        /**
           * The content's id the menu should use.
          */
         "contentId"?: string;
@@ -135,6 +149,10 @@ declare namespace LocalJSX {
           * If `true`, the menu is disabled.
          */
         "disabled"?: boolean;
+        /**
+          * If `true`, the keyboard will be automatically dismissed when the overlay is presented.
+         */
+        "keyboardClose"?: boolean;
         /**
           * The edge threshold for dragging the menu open. If a drag/swipe happens over this value, the menu is not triggered.
          */
@@ -151,6 +169,22 @@ declare namespace LocalJSX {
           * Emitted when the menu is open.
          */
         "onIonDidOpen"?: (event: CustomEvent<void>) => void;
+        /**
+          * Emitted after the modal has dismissed.
+         */
+        "onIonModalDidDismiss"?: (event: CustomEvent<OverlayEventDetail>) => void;
+        /**
+          * Emitted after the modal has presented.
+         */
+        "onIonModalDidPresent"?: (event: CustomEvent<void>) => void;
+        /**
+          * Emitted before the modal has dismissed.
+         */
+        "onIonModalWillDismiss"?: (event: CustomEvent<OverlayEventDetail>) => void;
+        /**
+          * Emitted before the modal has presented.
+         */
+        "onIonModalWillPresent"?: (event: CustomEvent<void>) => void;
         /**
           * Emitted when the menu is about to be closed.
          */

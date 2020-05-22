@@ -7,25 +7,31 @@
 
 ## Properties
 
-| Property       | Attribute        | Description                                                                                                        | Type               | Default     |
-| -------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------ | ----------- |
-| `contentId`    | `content-id`     | The content's id the menu should use.                                                                              | `string`           | `undefined` |
-| `disabled`     | `disabled`       | If `true`, the menu is disabled.                                                                                   | `boolean`          | `false`     |
-| `maxEdgeStart` | `max-edge-start` | The edge threshold for dragging the menu open. If a drag/swipe happens over this value, the menu is not triggered. | `number`           | `50`        |
-| `menuId`       | `menu-id`        | An id for the menu.                                                                                                | `string`           | `undefined` |
-| `side`         | `side`           | Which side of the view the menu should be placed.                                                                  | `"end" \| "start"` | `'start'`   |
-| `swipeGesture` | `swipe-gesture`  | If `true`, swiping the menu is enabled.                                                                            | `boolean`          | `true`      |
-| `type`         | `type`           | The display type of the menu. Available options: `"overlay"`, `"reveal"`, `"push"`.                                | `string`           | `undefined` |
+| Property        | Attribute        | Description                                                                                                        | Type               | Default     |
+| --------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------ | ----------- |
+| `animated`      | `animated`       | If `true`, the modal will animate.                                                                                 | `boolean`          | `true`      |
+| `contentId`     | `content-id`     | The content's id the menu should use.                                                                              | `string`           | `undefined` |
+| `disabled`      | `disabled`       | If `true`, the menu is disabled.                                                                                   | `boolean`          | `false`     |
+| `keyboardClose` | `keyboard-close` | If `true`, the keyboard will be automatically dismissed when the overlay is presented.                             | `boolean`          | `true`      |
+| `maxEdgeStart`  | `max-edge-start` | The edge threshold for dragging the menu open. If a drag/swipe happens over this value, the menu is not triggered. | `number`           | `50`        |
+| `menuId`        | `menu-id`        | An id for the menu.                                                                                                | `string`           | `undefined` |
+| `side`          | `side`           | Which side of the view the menu should be placed.                                                                  | `"end" \| "start"` | `'start'`   |
+| `swipeGesture`  | `swipe-gesture`  | If `true`, swiping the menu is enabled.                                                                            | `boolean`          | `true`      |
+| `type`          | `type`           | The display type of the menu. Available options: `"overlay"`, `"reveal"`, `"push"`.                                | `string`           | `undefined` |
 
 
 ## Events
 
-| Event          | Description                                  | Type                |
-| -------------- | -------------------------------------------- | ------------------- |
-| `ionDidClose`  | Emitted when the menu is closed.             | `CustomEvent<void>` |
-| `ionDidOpen`   | Emitted when the menu is open.               | `CustomEvent<void>` |
-| `ionWillClose` | Emitted when the menu is about to be closed. | `CustomEvent<void>` |
-| `ionWillOpen`  | Emitted when the menu is about to be opened. | `CustomEvent<void>` |
+| Event                 | Description                                  | Type                                   |
+| --------------------- | -------------------------------------------- | -------------------------------------- |
+| `ionDidClose`         | Emitted when the menu is closed.             | `CustomEvent<void>`                    |
+| `ionDidOpen`          | Emitted when the menu is open.               | `CustomEvent<void>`                    |
+| `ionModalDidDismiss`  | Emitted after the modal has dismissed.       | `CustomEvent<OverlayEventDetail<any>>` |
+| `ionModalDidPresent`  | Emitted after the modal has presented.       | `CustomEvent<void>`                    |
+| `ionModalWillDismiss` | Emitted before the modal has dismissed.      | `CustomEvent<OverlayEventDetail<any>>` |
+| `ionModalWillPresent` | Emitted before the modal has presented.      | `CustomEvent<void>`                    |
+| `ionWillClose`        | Emitted when the menu is about to be closed. | `CustomEvent<void>`                    |
+| `ionWillOpen`         | Emitted when the menu is about to be opened. | `CustomEvent<void>`                    |
 
 
 ## Methods

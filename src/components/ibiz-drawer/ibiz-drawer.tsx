@@ -1,5 +1,5 @@
 import { Component, Host, h, ComponentInterface, Element, Prop, Event, EventEmitter, Watch, Method, State, Listen, Build } from '@stencil/core';
-import { MenuI, Gesture, MenuChangeEventDetail, menuController, GestureDetail, Side, Animation } from '@ionic/core';
+import { MenuI, Gesture, MenuChangeEventDetail, menuController, GestureDetail, Side, Animation, OverlayInterface, FrameworkDelegate, OverlayEventDetail } from '@ionic/core';
 
 import { config } from '../../global/config';
 import { getIonMode } from '../../global/ionic-global';
@@ -22,7 +22,57 @@ const mdEasingReverse = 'cubic-bezier(0.4, 0, 0.6, 1)';
     },
     shadow: true,
 })
-export class IbizDrawer implements ComponentInterface, MenuI {
+export class IbizDrawer implements ComponentInterface, MenuI, OverlayInterface {
+
+    // 多余的实现
+    presented: boolean;
+    enterAnimation?: import("@ionic/core").AnimationBuilder;
+    leaveAnimation?: import("@ionic/core").AnimationBuilder;
+    present(): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
+    dismiss(data?: any, role?: string): Promise<boolean> {
+        console.log(data, role);
+        throw new Error("Method not implemented.");
+    }
+
+    /** @internal */
+    @Prop() overlayIndex!: number;
+
+    /** @internal */
+    @Prop() delegate?: FrameworkDelegate;
+
+    /**
+     * If `true`, the keyboard will be automatically dismissed when the overlay is presented.
+     */
+    @Prop() keyboardClose = true;
+
+    /**
+     * If `true`, the modal will animate.
+     */
+    @Prop() animated = true;
+
+    /**
+     * Emitted after the modal has presented.
+     */
+    @Event({ eventName: 'ionModalDidPresent' }) didPresent!: EventEmitter<void>;
+
+    /**
+     * Emitted before the modal has presented.
+     */
+    @Event({ eventName: 'ionModalWillPresent' }) willPresent!: EventEmitter<void>;
+
+    /**
+     * Emitted before the modal has dismissed.
+     */
+    @Event({ eventName: 'ionModalWillDismiss' }) willDismiss!: EventEmitter<OverlayEventDetail>;
+
+    /**
+     * Emitted after the modal has dismissed.
+     */
+    @Event({ eventName: 'ionModalDidDismiss' }) didDismiss!: EventEmitter<OverlayEventDetail>;
+    // 多余的实现
+
 
     private animation?: any;
     private lastOnEnd = 0;
@@ -568,6 +618,9 @@ export class IbizDrawer implements ComponentInterface, MenuI {
                     'menu-side-end': isEndSide,
                     'menu-side-start': !isEndSide,
                     'menu-pane-visible': isPaneVisible
+                }}
+                style={{
+                    zIndex: `${20000 + this.overlayIndex}`,
                 }}>
                 <div
                     class="menu-inner"

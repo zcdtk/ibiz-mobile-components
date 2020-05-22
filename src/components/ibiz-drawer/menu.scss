@@ -112,9 +112,9 @@ ion-backdrop {
 // The menu slides over the content. The content
 // itself, which is under the menu, does not move.
 
-:host(.menu-type-overlay) {
-  z-index: $z-index-menu-overlay;
-}
+// :host(.menu-type-overlay) {
+//   z-index: $z-index-menu-overlay;
+// }
 
 :host(.menu-type-overlay) .show-backdrop {
   display: block;
