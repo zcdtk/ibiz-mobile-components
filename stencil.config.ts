@@ -5,6 +5,7 @@ export const config: Config = {
   namespace: 'ibiz-mobile-components',
   bundles: [
     { components: ['ibiz-mobile-calendar'] },
+    { components: ['ibiz-drawer'] },
   ],
   plugins: [
     sass()
