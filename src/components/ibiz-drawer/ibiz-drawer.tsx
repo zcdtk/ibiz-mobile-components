@@ -555,9 +555,33 @@ export class IbizDrawer implements ComponentInterface, MenuI {
 
 
     render() {
+        const { isEndSide, type, disabled, isPaneVisible } = this;
+        const mode = getIonMode(this);
+
         return (
-            <Host>
-                <slot></slot>
+            <Host
+                role="navigation"
+                class={{
+                    [mode]: true,
+                    [`menu-type-${type}`]: true,
+                    'menu-enabled': !disabled,
+                    'menu-side-end': isEndSide,
+                    'menu-side-start': !isEndSide,
+                    'menu-pane-visible': isPaneVisible
+                }}>
+                <div
+                    class="menu-inner"
+                    part="container"
+                    ref={el => this.menuInnerEl = el}>
+                    <slot></slot>
+                </div>
+
+                <ion-backdrop
+                    ref={el => this.backdropEl = el}
+                    class="menu-backdrop"
+                    tappable={false}
+                    stopPropagation={false}
+                    part="backdrop" />
             </Host>
         );
     }

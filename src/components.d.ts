@@ -5,10 +5,65 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { MenuChangeEventDetail, Side, } from "@ionic/core";
 export namespace Components {
     interface CalendarMonth {
     }
     interface CalendarWeek {
+    }
+    interface IbizDrawer {
+        /**
+          * Closes the menu. If the menu is already closed or it can't be closed, it returns `false`.
+         */
+        "close": (animated?: boolean) => Promise<boolean>;
+        /**
+          * The content's id the menu should use.
+         */
+        "contentId"?: string;
+        /**
+          * If `true`, the menu is disabled.
+         */
+        "disabled": boolean;
+        /**
+          * Returns `true` is the menu is active.  A menu is active when it can be opened or closed, meaning it's enabled and it's not part of a `ion-split-pane`.
+         */
+        "isActive": () => Promise<boolean>;
+        /**
+          * Returns `true` is the menu is open.
+         */
+        "isOpen": () => Promise<boolean>;
+        /**
+          * The edge threshold for dragging the menu open. If a drag/swipe happens over this value, the menu is not triggered.
+         */
+        "maxEdgeStart": number;
+        /**
+          * An id for the menu.
+         */
+        "menuId"?: string;
+        /**
+          * Opens the menu. If the menu is already open or it can't be opened, it returns `false`.
+         */
+        "open": (animated?: boolean) => Promise<boolean>;
+        /**
+          * Opens or closes the button. If the operation can't be completed successfully, it returns `false`.
+         */
+        "setOpen": (shouldOpen: boolean, animated?: boolean) => Promise<boolean>;
+        /**
+          * Which side of the view the menu should be placed.
+         */
+        "side": Side;
+        /**
+          * If `true`, swiping the menu is enabled.
+         */
+        "swipeGesture": boolean;
+        /**
+          * Toggles the menu. If the menu is already open, it will try to close, otherwise it will try to open it. If the operation can't be completed successfully, it returns `false`.
+         */
+        "toggle": (animated?: boolean) => Promise<boolean>;
+        /**
+          * The display type of the menu. Available options: `"overlay"`, `"reveal"`, `"push"`.
+         */
+        "type"?: string;
     }
     interface IbizMobileCalendar {
     }
@@ -40,6 +95,12 @@ declare global {
         prototype: HTMLCalendarWeekElement;
         new (): HTMLCalendarWeekElement;
     };
+    interface HTMLIbizDrawerElement extends Components.IbizDrawer, HTMLStencilElement {
+    }
+    var HTMLIbizDrawerElement: {
+        prototype: HTMLIbizDrawerElement;
+        new (): HTMLIbizDrawerElement;
+    };
     interface HTMLIbizMobileCalendarElement extends Components.IbizMobileCalendar, HTMLStencilElement {
     }
     var HTMLIbizMobileCalendarElement: {
@@ -55,6 +116,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "calendar-month": HTMLCalendarMonthElement;
         "calendar-week": HTMLCalendarWeekElement;
+        "ibiz-drawer": HTMLIbizDrawerElement;
         "ibiz-mobile-calendar": HTMLIbizMobileCalendarElement;
         "my-component": HTMLMyComponentElement;
     }
@@ -63,6 +125,52 @@ declare namespace LocalJSX {
     interface CalendarMonth {
     }
     interface CalendarWeek {
+    }
+    interface IbizDrawer {
+        /**
+          * The content's id the menu should use.
+         */
+        "contentId"?: string;
+        /**
+          * If `true`, the menu is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * The edge threshold for dragging the menu open. If a drag/swipe happens over this value, the menu is not triggered.
+         */
+        "maxEdgeStart"?: number;
+        /**
+          * An id for the menu.
+         */
+        "menuId"?: string;
+        /**
+          * Emitted when the menu is closed.
+         */
+        "onIonDidClose"?: (event: CustomEvent<void>) => void;
+        /**
+          * Emitted when the menu is open.
+         */
+        "onIonDidOpen"?: (event: CustomEvent<void>) => void;
+        /**
+          * Emitted when the menu is about to be closed.
+         */
+        "onIonWillClose"?: (event: CustomEvent<void>) => void;
+        /**
+          * Emitted when the menu is about to be opened.
+         */
+        "onIonWillOpen"?: (event: CustomEvent<void>) => void;
+        /**
+          * Which side of the view the menu should be placed.
+         */
+        "side"?: Side;
+        /**
+          * If `true`, swiping the menu is enabled.
+         */
+        "swipeGesture"?: boolean;
+        /**
+          * The display type of the menu. Available options: `"overlay"`, `"reveal"`, `"push"`.
+         */
+        "type"?: string;
     }
     interface IbizMobileCalendar {
     }
@@ -83,6 +191,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "calendar-month": CalendarMonth;
         "calendar-week": CalendarWeek;
+        "ibiz-drawer": IbizDrawer;
         "ibiz-mobile-calendar": IbizMobileCalendar;
         "my-component": MyComponent;
     }
@@ -93,6 +202,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "calendar-month": LocalJSX.CalendarMonth & JSXBase.HTMLAttributes<HTMLCalendarMonthElement>;
             "calendar-week": LocalJSX.CalendarWeek & JSXBase.HTMLAttributes<HTMLCalendarWeekElement>;
+            "ibiz-drawer": LocalJSX.IbizDrawer & JSXBase.HTMLAttributes<HTMLIbizDrawerElement>;
             "ibiz-mobile-calendar": LocalJSX.IbizMobileCalendar & JSXBase.HTMLAttributes<HTMLIbizMobileCalendarElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
