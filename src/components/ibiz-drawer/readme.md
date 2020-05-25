@@ -10,6 +10,7 @@
 | Property        | Attribute        | Description                                                                                                        | Type               | Default     |
 | --------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------ | ----------- |
 | `animated`      | `animated`       | If `true`, the modal will animate.                                                                                 | `boolean`          | `true`      |
+| `closeView`     | `close-view`     |                                                                                                                    | `boolean`          | `false`     |
 | `contentId`     | `content-id`     | The content's id the menu should use.                                                                              | `string`           | `undefined` |
 | `disabled`      | `disabled`       | If `true`, the menu is disabled.                                                                                   | `boolean`          | `false`     |
 | `keyboardClose` | `keyboard-close` | If `true`, the keyboard will be automatically dismissed when the overlay is presented.                             | `boolean`          | `true`      |
@@ -24,6 +25,7 @@
 
 | Event                 | Description                                  | Type                                   |
 | --------------------- | -------------------------------------------- | -------------------------------------- |
+| `dropClick`           |                                              | `CustomEvent<void>`                    |
 | `ionDidClose`         | Emitted when the menu is closed.             | `CustomEvent<void>`                    |
 | `ionDidOpen`          | Emitted when the menu is open.               | `CustomEvent<void>`                    |
 | `ionModalDidDismiss`  | Emitted after the modal has dismissed.       | `CustomEvent<OverlayEventDetail<any>>` |

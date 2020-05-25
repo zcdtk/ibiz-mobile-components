@@ -20,6 +20,7 @@ export namespace Components {
           * Closes the menu. If the menu is already closed or it can't be closed, it returns `false`.
          */
         "close": (animated?: boolean) => Promise<boolean>;
+        "closeView"?: boolean;
         /**
           * The content's id the menu should use.
          */
@@ -141,6 +142,7 @@ declare namespace LocalJSX {
           * If `true`, the modal will animate.
          */
         "animated"?: boolean;
+        "closeView"?: boolean;
         /**
           * The content's id the menu should use.
          */
@@ -161,6 +163,7 @@ declare namespace LocalJSX {
           * An id for the menu.
          */
         "menuId"?: string;
+        "onDropClick"?: (event: CustomEvent<void>) => void;
         /**
           * Emitted when the menu is closed.
          */
