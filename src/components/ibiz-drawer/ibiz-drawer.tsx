@@ -1,12 +1,12 @@
 import { Component, Host, h, ComponentInterface, Element, Prop, Event, EventEmitter, Watch, Method, State, Listen, Build } from '@stencil/core';
 import { MenuI, Gesture, MenuChangeEventDetail, menuController, GestureDetail, Side, Animation, OverlayInterface, FrameworkDelegate, OverlayEventDetail } from '@ionic/core';
 
-import { config } from '../../global/config';
-import { getIonMode } from '../../global/ionic-global';
+import { config } from '@ionic/core/dist/collection/global/config';
+import { getIonMode } from '@ionic/core/dist/collection/global/ionic-global';
 // import { Animation, Gesture, GestureDetail, MenuChangeEventDetail, MenuI, Side } from '../../interface';
-import { getTimeGivenProgression } from '../../utils/animation/cubic-bezier';
-import { GESTURE_CONTROLLER } from '../../utils/gesture';
-import { assert, clamp, isEndSide as isEnd } from '../../utils/helpers';
+import { getTimeGivenProgression } from '@ionic/core/dist/collection/utils/animation/cubic-bezier';
+import { GESTURE_CONTROLLER } from '@ionic/core/dist/collection/utils/gesture';
+import { assert, clamp, isEndSide as isEnd } from '@ionic/core/dist/collection/utils/helpers';
 import { prepareOverlay } from '@ionic/core/dist/collection/utils/overlays';
 
 const iosEasing = 'cubic-bezier(0.32,0.72,0,1)';
@@ -17,8 +17,7 @@ const mdEasingReverse = 'cubic-bezier(0.4, 0, 0.6, 1)';
 @Component({
     tag: 'ibiz-drawer',
     styleUrls: {
-        ios: 'menu.ios.scss',
-        md: 'menu.md.scss'
+        ios: 'menu.ios.scss'
     },
     shadow: true,
 })
@@ -249,7 +248,7 @@ export class IbizDrawer implements ComponentInterface, MenuI, OverlayInterface {
         // register this menu with the app's menu controller
         menuController._register(this);
 
-        this.gesture = (await import('../../utils/gesture')).createGesture({
+        this.gesture = (await import('@ionic/core/dist/collection/utils/gesture')).createGesture({
             el: document,
             gestureName: 'menu-swipe',
             gesturePriority: 30,
