@@ -155,6 +155,15 @@ export class IbizDrawer implements ComponentInterface, MenuI, OverlayInterface {
         this.isEndSide = isEnd(this.side);
     }
 
+    @Prop() closeView?: boolean = false;
+
+    @Watch('closeView')
+    protected closeViewChange(closeView: boolean) {
+        if(closeView){
+            this.close();
+        }
+    } 
+
     /**
      * If `true`, swiping the menu is enabled.
      */
@@ -188,6 +197,8 @@ export class IbizDrawer implements ComponentInterface, MenuI, OverlayInterface {
      * Emitted when the menu is closed.
      */
     @Event() ionDidClose!: EventEmitter<void>;
+
+    @Event() dropClick!: EventEmitter<void>;
 
     /**
      * Emitted when the menu state is changed.
@@ -285,8 +296,10 @@ export class IbizDrawer implements ComponentInterface, MenuI, OverlayInterface {
             const shouldClose = (ev.composedPath)
                 ? !ev.composedPath().includes(this.menuInnerEl)
                 : false;
-
-            if (shouldClose) {
+            if(this.dropClick && shouldClose){
+                this.dropClick.emit();
+            }
+            if (shouldClose && this.closeView) {
                 ev.preventDefault();
                 ev.stopPropagation();
                 this.close();
@@ -320,8 +333,7 @@ export class IbizDrawer implements ComponentInterface, MenuI, OverlayInterface {
     @Method()
     open(animated = true): Promise<boolean> {
         return this.setOpen(true, animated);
-    }
-
+    }       
     /**
      * Closes the menu. If the menu is already closed or it can't be closed,
      * it returns `false`.
