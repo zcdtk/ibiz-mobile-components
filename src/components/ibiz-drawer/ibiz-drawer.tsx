@@ -7,7 +7,7 @@ import { getIonMode } from '../../global/ionic-global';
 import { getTimeGivenProgression } from '../../utils/animation/cubic-bezier';
 import { GESTURE_CONTROLLER } from '../../utils/gesture';
 import { assert, clamp, isEndSide as isEnd } from '../../utils/helpers';
-
+import { prepareOverlay } from '@ionic/core/dist/collection/utils/overlays';
 
 const iosEasing = 'cubic-bezier(0.32,0.72,0,1)';
 const mdEasing = 'cubic-bezier(0.0,0.0,0.2,1)';
@@ -71,6 +71,11 @@ export class IbizDrawer implements ComponentInterface, MenuI, OverlayInterface {
      * Emitted after the modal has dismissed.
      */
     @Event({ eventName: 'ionModalDidDismiss' }) didDismiss!: EventEmitter<OverlayEventDetail>;
+
+    constructor() {
+        prepareOverlay(this.el);
+    }
+
     // 多余的实现
 
 
@@ -87,7 +92,7 @@ export class IbizDrawer implements ComponentInterface, MenuI, OverlayInterface {
     menuInnerEl?: HTMLElement;
     contentEl?: HTMLElement;
 
-    @Element() el!: HTMLIonMenuElement;
+    @Element() el!: any;
 
     @State() isPaneVisible = false;
     @State() isEndSide = false;
